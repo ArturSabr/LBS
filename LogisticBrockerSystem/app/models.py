@@ -17,7 +17,7 @@ usertypes = [
 
 class DeliveryDocs(models.Model):
     title = models.CharField(max_length=255, verbose_name="Название")
-    document = models.FileField(verbose_name="Документ")
+    document = models.FileField(verbose_name="Документ",upload_to='delivery_docs')
     created_date = models.DateField(verbose_name="Дата создания")
 
     def __str__(self):
@@ -79,7 +79,7 @@ class Price(models.Model):
 
 
 class DriverDocument(models.Model):
-    document = models.FileField(verbose_name="Документ")
+    document = models.FileField(verbose_name="Документ",upload_to='driver_documents')
 
     def __str__(self):
         return self.document.name
@@ -185,7 +185,7 @@ class Message(models.Model):
 
 
 class MessageDoc(models.Model):
-    documet = models.FileField(verbose_name="Документ")
+    documet = models.FileField(verbose_name="Документ",upload_to='message_docs')
 
     def __str__(self):
         return self.documet.name
@@ -213,7 +213,7 @@ class CompanyFeedback(models.Model):
 
 
 class FeedbackImage(models.Model):
-    image = models.ImageField(upload_to='media/feedback/', verbose_name="Изображение")
+    image = models.ImageField(upload_to='feedback_files', verbose_name="Изображение")
 
     def __str__(self):
         return self.image.name

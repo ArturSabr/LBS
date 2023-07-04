@@ -1,6 +1,8 @@
-from django.urls import path, include
 from rest_framework.routers import DefaultRouter
+from django.conf import settings
 from .views import *
+from django.urls import path
+from django.conf.urls.static import static
 
 router = DefaultRouter()
 router.register(r'all', AllViewSet, basename='all')
@@ -30,4 +32,4 @@ urlpatterns = [
     path('feedaback/list', FeedbackListView.as_view()),
     path('feedaback/create', FeedbackCreateView.as_view()),
     path('calculate/', calculate_sum, name='calculate-sum'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
