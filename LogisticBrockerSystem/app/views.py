@@ -1,10 +1,12 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, generics, status
 
 from .models import *
 from .serializers import *
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+
 
 @api_view(['GET'])
 def calculate_sum(request):
@@ -28,9 +30,62 @@ def calculate_sum(request):
     return Response(data)
 
 
+class ListProductSerializer:
+    pass
+
+
+class OrderListView(generics.ListAPIView):
+    serializer_class = OrderSerializer
+    queryset = Order.objects.all()
+    permission_classes = (IsAuthenticated,)
+
+
+class OrderCreateView(generics.CreateAPIView):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+    permission_classes = (IsAuthenticated,)
+
+
+class OrderDetailCreateDeleteView(generics.RetrieveUpdateDestroyAPIView):
+    lookup_field = 'pk'
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+    permission_classes = (IsAuthenticated,)
+
+class CompanyListView(generics.ListAPIView):
+    serializer_class = CompanySerializer
+    queryset = Company.objects.all()
+    permission_classes = (IsAuthenticated,)
+
+
+class CompanyCreateView(generics.CreateAPIView):
+    queryset = Company.objects.all()
+    serializer_class = CompanySerializer
+    permission_classes = (IsAuthenticated,)
+
+
+class CompanyDetailCreateDeleteView(generics.RetrieveUpdateDestroyAPIView):
+    lookup_field = 'pk'
+    queryset = Company.objects.all()
+    serializer_class = CompanySerializer
+    permission_classes = (IsAuthenticated,)
+
+
+class FeedbackListView(generics.ListAPIView):
+    serializer_class = FeedbackSerializer
+    queryset = Feedback.objects.all()
+    permission_classes = (IsAuthenticated,)
+
+
+class FeedbackCreateView(generics.CreateAPIView):
+    queryset = Feedback.objects.all()
+    serializer_class = FeedbackSerializer
+    permission_classes = (IsAuthenticated,)
+
 class DeliveryDocsViewSet(viewsets.ModelViewSet):
     queryset = DeliveryDocs.objects.all()
     serializer_class = DeliveryDocsSerializer
+
 
 class AllViewSet(viewsets.ViewSet):
     def list(self, request):

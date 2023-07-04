@@ -20,6 +20,14 @@ router.register(r'feedbackimage', FeedbackImageViewSet)
 router.register(r'chat', ChatViewSet)
 
 urlpatterns = [
-    path('', include(router.urls)),
+    # path('', include(router.urls)),
+    path('order/list', OrderListView.as_view()),
+    path('order/create', OrderCreateView.as_view()),
+    path('order/<int:pk>', OrderDetailCreateDeleteView.as_view()),
+    path('company/list', CompanyListView.as_view()),
+    path('company/create', CompanyCreateView.as_view()),
+    path('company/<int:pk>', CompanyDetailCreateDeleteView.as_view()),
+    path('feedaback/list', FeedbackListView.as_view()),
+    path('feedaback/create', FeedbackCreateView.as_view()),
     path('calculate/', calculate_sum, name='calculate-sum'),
 ]

@@ -2,6 +2,17 @@ from rest_framework import serializers
 from .models import DeliveryDocs, Delivery, Driver, Price, DriverDocument, Order, User, Feedback, Company, Message, MessageDoc, CompanyFeedback, FeedbackImage, Chat
 
 
+class ListOrderSerializer(serializers.Serializer):
+    orders = serializers.JSONField()
+
+    def create(self, validated_data):
+        for i in validated_data['orders']:
+            print(i)
+        return {'Привет': 'Привет'}
+
+
+
+
 class DeliveryDocsSerializer(serializers.ModelSerializer):
     class Meta:
         model = DeliveryDocs
