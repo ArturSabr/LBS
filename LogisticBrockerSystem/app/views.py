@@ -9,21 +9,37 @@ from rest_framework.permissions import IsAuthenticated
 
 
 @api_view(['GET'])
-def calculate_sum(request):
+def calculate_rpm(request):
     # Получение параметров из URL
-    param1 = int(request.GET.get('param1', 0))
-    param2 = int(request.GET.get('param2', 0))
-    param3 = int(request.GET.get('param3', 0))
+    cost_of_transportation = int(request.GET.get('cost_of_transportation', 0))
+    Operating_expenses = int(request.GET.get('Operating_expenses', 0))
+    Transportation_distance = int(request.GET.get('Transportation_distance', 0))
+    average = int(request.GET.get('average', 0))
 
-    # Вычисление суммы
-    total_sum = param1 + param2 + param3
+    """
+    
+    #логика вычислений: средняя_арифметическая от средней rpm на рынке и частным от суммы расходов к расстоянию
+    
+    # RPM = (((C + O) / D) + A) / 2
+
+    RPM - "rate per mile" (стоимость за милю).
+    C - Стоимость перевозки (включая операционные расходы и дополнительные услуги).
+    O - Операционные расходы (административные расходы, страховка, комиссии и т. д.).
+    D - Расстояние перевозки (в милях).
+    A - Средний rpm на рынке перевозок
+    
+    """
+
+
+    RPM = (((cost_of_transportation + Operating_expenses) / Transportation_distance) + average)/2
 
     # Создание словаря с результатами
     data = {
-        'param1': param1,
-        'param2': param2,
-        'param3': param3,
-        'total_sum': total_sum
+        'cost_of_transportation': cost_of_transportation,
+        'Operating_expenses': Operating_expenses,
+        'Transportation_distance': Transportation_distance,
+        'average': average,
+        'RPM': RPM
     }
 
     # Возврат API с результатами

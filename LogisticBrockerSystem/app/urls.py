@@ -31,5 +31,5 @@ urlpatterns = [
     path('company/<int:pk>', CompanyDetailCreateDeleteView.as_view()),
     path('feedaback/list', FeedbackListView.as_view()),
     path('feedaback/create', FeedbackCreateView.as_view()),
-    path('calculate/', calculate_sum, name='calculate-sum'),
+    path('calculate_rpm/', calculate_rpm, name='calculate-rpm'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
